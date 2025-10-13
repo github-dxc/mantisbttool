@@ -1,0 +1,2932 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+        <meta name="robots" content="noindex,follow"/>
+        <title>查看问题 - MantisBT</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/default.css?cache_key=991bb728eea2923f36cfa9c64025e9ae"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/status_config.php?cache_key=990a348b488b9c163bcdc2bc816bb905"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/dropzone-5.5.0.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/bootstrap-3.4.1.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/font-awesome-4.7.0.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/fonts.css?cache_key=991bb728eea2923f36cfa9c64025e9ae"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/bootstrap-datetimepicker-4.17.47.min.css"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/ace.min.css?cache_key=991bb728eea2923f36cfa9c64025e9ae"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/ace-mantis.css?cache_key=991bb728eea2923f36cfa9c64025e9ae"/>
+        <link rel="stylesheet" type="text/css" href="http://bug.test.com/css/ace-skins.min.css?cache_key=991bb728eea2923f36cfa9c64025e9ae"/>
+        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"/>
+        <link rel="search" type="application/opensearchdescription+xml" title="MantisBT：全文搜索" href="http://bug.test.com/browser_search_plugin.php?type=text"/>
+        <link rel="search" type="application/opensearchdescription+xml" title="MantisBT：按问题Id搜索" href="http://bug.test.com/browser_search_plugin.php?type=id"/>
+        <script type="text/javascript" src="/javascript_config.php?cache_key=990a348b488b9c163bcdc2bc816bb905"></script>
+        <script type="text/javascript" src="/javascript_translations.php?cache_key=aaa06b70c166522c6368bc2bbf601c96"></script>
+        <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="/js/dropzone-5.5.0.min.js"></script>
+        <script type="text/javascript" src="/js/common.js"></script>
+        <script type="text/javascript" src="/js/bugFilter.js"></script>
+        <meta http-equiv="Refresh" content="1800; URL=http://bug.test.com/view_all_bug_page.php?refresh=true"/>
+    </head>
+    <body class="skin-3">
+        <style>
+            * {
+                font-family: "Open Sans";
+            }
+
+            h1, h2, h3, h4, h5 {
+                font-family: "Open Sans";
+            }
+        </style>
+        <div id="navbar" class="navbar navbar-default navbar-collapse navbar-fixed-top noprint">
+            <div id="navbar-container" class="navbar-container">
+                <button id="menu-toggler" type="button" class="navbar-toggle menu-toggler pull-left hidden-lg hidden-md" data-target="#sidebar">
+                    <span class="sr-only">Toggle sidebar</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-header">
+                    <a href="/my_view_page.php" class="navbar-brand">
+                        <span class="smaller-75">MantisBT </span>
+                    </a>
+                    <button type="button" class="navbar-toggle navbar-toggle collapsed pull-right hidden-sm hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-buttons,.navbar-menu">
+                        <span class="sr-only">Toggle user menu</span>
+                        <i class="fa fa-user ace-icon fa-2x white"></i>
+                    </button>
+                </div>
+                <div class="navbar-buttons navbar-header navbar-collapse collapse">
+                    <ul class="nav ace-nav">
+                        <li class="hidden-sm hidden-xs">
+                            <div class="btn-group btn-corner padding-right-8 padding-left-8">
+                                <a class="btn btn-primary btn-sm" href="bug_report_page.php">
+                                    <i class="fa fa-edit "></i>
+                                    提交问题
+                                </a>
+                            </div>
+                        </li>
+                        <li class="grey" id="dropdown_projects_menu">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                &#160;所有项目 &#160;<i class="fa fa-angle-down ace-icon bigger-110"></i>
+                            </a>
+                            <ul id="projects-list" class=" dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">
+                                <li>
+                                    <div class="projects-searchbox">
+                                        <input class="search form-control input-md" placeholder="搜索"/>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="scrollable-menu">
+                                        <ul class="list dropdown-yellow no-margin">
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=0">所有项目</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=22">EasyLink</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=22;24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EasyLink-用户端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=22;23">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EasyLink-管理端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=9">云计算</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=9;11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云计算-用户端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=9;10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云计算-管理端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=9;21">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云计算-线上问题</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=26">云计算海外版</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=26;28">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云计算海外版-用户端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=26;27">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云计算海外版-管理端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=13">云转码</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=13;16">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云转码-用户端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=13;17">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;云转码-管理端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=12">证书系统</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=25">资源管理系统</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=18">钱包</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=18;20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钱包-用户端</a>
+                                            </li>
+                                            <li>
+                                                <a class="project-link" href="/set_project.php?project_id=18;19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钱包-管理端</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="grey">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                <i class="fa fa-user ace-icon fa-2x white"></i>
+                                <span class="user-info">dengxiangcheng</span>
+                                <i class="fa fa-angle-down ace-icon"></i>
+                            </a>
+                            <ul class="user-menu dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-close">
+                                <li>
+                                    <a href="/account_page.php">
+                                        <i class="fa fa-user ace-icon"></i>
+                                        个人资料
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://bug.test.com/issues_rss.php?username=dengxiangcheng&amp;key=tLMlKcecwL01NmmSJKxQwagQKUwCTYXmVe3Jmde_Oidz1m4uaSKeZZ0gqXBW9qKoc9tITSY0seM0nAx2PXLK">
+                                        <i class="fa fa-rss-square orange ace-icon"></i>
+                                        RSS
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/logout_page.php">
+                                        <i class="fa fa-sign-out ace-icon"></i>
+                                        注销
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="main-container" id="main-container">
+            <div id="sidebar" class="sidebar sidebar-fixed responsive compact ">
+                <ul class="nav nav-list">
+                    <li>
+                        <a href="/my_view_page.php">
+                            <i class="fa fa-dashboard menu-icon"></i>
+                            <span class="menu-text">我的视图 </span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li class="active">
+                        <a href="/view_all_bug_page.php">
+                            <i class="fa fa-list-alt menu-icon"></i>
+                            <span class="menu-text">查看问题 </span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li>
+                        <a href="/bug_report_page.php">
+                            <i class="fa fa-edit menu-icon"></i>
+                            <span class="menu-text">提交问题 </span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li>
+                        <a href="/changelog_page.php">
+                            <i class="fa fa-retweet menu-icon"></i>
+                            <span class="menu-text">变更日志 </span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                    <li>
+                        <a href="/roadmap_page.php">
+                            <i class="fa fa-road menu-icon"></i>
+                            <span class="menu-text">路线图 </span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                </ul>
+                <div id="sidebar-btn" class="sidebar-toggle sidebar-collapse">
+                    <i data-icon2="ace-icon fa fa-angle-double-right" data-icon1="ace-icon fa fa-angle-double-left" class="ace-icon fa fa-angle-double-left"></i>
+                </div>
+            </div>
+            <div class="main-content">
+                <div id="breadcrumbs" class="breadcrumbs noprint">
+                    <ul class="breadcrumb">
+                        <li>
+                            <i class="fa fa-user home-icon active"></i>
+                            <a href="/account_page.php">dengxiangcheng ( 邓祥成 ) </a>
+                            <span class="label hidden-xs label-default arrowed">开发人员</span>
+                        </li>
+                    </ul>
+                    <div id="nav-search" class="nav-search">
+                        <form class="form-search" method="post" action="/jump_to_bug.php">
+                            <span class="input-icon">
+                                <input type="text" name="bug_id" autocomplete="off" class="nav-search-input" placeholder="问题 #">
+                                <i class="fa fa-search ace-icon nav-search-icon"></i>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="filter-box">
+                                <div id="filter" class="widget-box widget-color-blue2 ">
+                                    <div class="widget-header widget-header-small">
+                                        <h4 class="widget-title lighter">
+                                            <i class="fa fa-filter ace-icon"></i>
+                                            过滤器			
+                                        </h4>
+                                        <div class="widget-toolbar">
+                                            <div class="widget-menu">
+                                                <a href="#" data-action="settings" data-toggle="dropdown">
+                                                    <i class="fa fa-bars ace-icon bigger-125"></i>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-right dropdown-yellow dropdown-caret dropdown-closer">
+                                                    <li>
+                                                        <a href="view_all_set.php?type=2&view_type=advanced">
+                                                            <i class="fa fa-toggle-on ace-icon"></i>
+</i>&#160;&#160;高级过滤器</a></li>
+<li>
+    <a href="permalink_page.php?filter=688981a07116d&permalink_token=20250730BryfQi5kiVCnzpHMvE6lDVrkmKjHBnr5">
+        <i class="fa fa-link ace-icon"></i>
+        &#160;&#160;创建固定链接
+    </a>
+</li>
+</ul></div>
+<a id="filter-toggle" data-action="collapse" href="#">
+    <i class="fa fa-chevron-up 1 ace-icon bigger-125"></i>
+</a>
+</div>
+<div id="filter-bar-queries" class="widget-toolbar no-border" style="display: none">
+    <div class="widget-menu margin-left-8">
+        <a class="btn btn-primary btn-white btn-round btn-xs" title="重置过滤器" href="view_all_set.php?type=0">
+            <i class="fa fa-times ace-icon"></i>
+        </a>
+    </div>
+    <div class="widget-menu margin-right-8">
+        <form method="post" action="view_all_set.php">
+            <input type="hidden" name="type" value="2"/>
+            <input id="filter-bar-search-txt" type="text" size="16" class="input-xs" placeholder="搜索" name="search" value=""/>
+            <button id="filter-bar-search-btn" type="submit" name="filter_submit" class="btn btn-primary btn-white btn-round btn-xs" title="应用过滤器">
+                <i class="fa fa-search ace-icon"></i>
+            </button>
+        </form>
+    </div>
+</div>
+</div>
+<div class="widget-body">
+    <div class="widget-toolbox padding-4 clearfix">
+        <div class="btn-toolbar">
+            <div class="form-inline">
+                <div class="btn-group pull-left">
+                    <a class="btn btn-sm btn-primary btn-white btn-round" href="view_all_set.php?type=0">
+                        <i class="fa fa-times ace-icon"></i>
+                        重置							
+                    </a>
+                    <a class="btn btn-sm btn-primary btn-white btn-round" href="query_store_page.php">
+                        <i class="fa fa-floppy-o ace-icon"></i>
+                        保存							
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post" name="filters_open" id="filters_form_open" action="view_all_set.php">
+        <input type="hidden" name="type" value="1"/>
+        <input type="hidden" name="view_type" value="simple"/>
+        <div class="widget-main no-padding">
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed2 filters">
+                    <tr>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="reporter_id_filter" class="dynamic-filter-expander" data-filter_id="114">报告员</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="handler_id_filter" class="dynamic-filter-expander" data-filter_id="114">分派给</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="user_monitor_filter" class="dynamic-filter-expander" data-filter_id="114">监视人</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="note_user_id_filter" class="dynamic-filter-expander" data-filter_id="114">注释方式</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="show_priority_filter" class="dynamic-filter-expander" data-filter_id="114">优先级</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="show_severity_filter" class="dynamic-filter-expander" data-filter_id="114">严重性</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="view_state_filter" class="dynamic-filter-expander" data-filter_id="114">查看权限</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="sticky_issues_filter" class="dynamic-filter-expander" data-filter_id="114">显示置顶问题</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="small-caption " id="reporter_id_filter_target">
+                            <input type="hidden" name="reporter_id[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="handler_id_filter_target">
+                            <input type="hidden" name="handler_id[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="user_monitor_filter_target">
+                            <input type="hidden" name="monitor_user_id[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="note_user_id_filter_target">
+                            <input type="hidden" name="note_user_id[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="show_priority_filter_target">
+                            <input type="hidden" name="priority[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="show_severity_filter_target">
+                            <input type="hidden" name="severity[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="view_state_filter_target">
+                            任意<input type="hidden" name="view_state" value="0"/>
+                        </td>
+                        <td class="small-caption " id="sticky_issues_filter_target">
+                            是	<input type="hidden" name="sticky" value="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="show_category_filter" class="dynamic-filter-expander" data-filter_id="114">分类</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="hide_status_filter" class="dynamic-filter-expander" data-filter_id="114">隐藏状态</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="show_status_filter" class="dynamic-filter-expander" data-filter_id="114">状态</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="show_resolution_filter" class="dynamic-filter-expander" data-filter_id="114">处理状况</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="do_filter_by_date_filter" class="dynamic-filter-expander" data-filter_id="114">按提交日期过滤</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="do_filter_by_last_updated_date_filter" class="dynamic-filter-expander" data-filter_id="114">按上次更新日期过滤</a>
+                        </td>
+                        <td class="small-caption category" colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="small-caption " id="show_category_filter_target">
+                            <input type="hidden" name="category_id[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="hide_status_filter_target">
+                            <input type="hidden" name="hide_status[]" value="90"/>已关闭 (和以上)
+                        </td>
+                        <td class="small-caption " id="show_status_filter_target">
+                            <input type="hidden" name="status[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="show_resolution_filter_target">
+                            <input type="hidden" name="resolution[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="do_filter_by_date_filter_target">否</td>
+                        <td class="small-caption " id="do_filter_by_last_updated_date_filter_target">否</td>
+                        <td colspan="2">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="show_profile_filter" class="dynamic-filter-expander" data-filter_id="114">配置</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="platform_filter" class="dynamic-filter-expander" data-filter_id="114">平台</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="os_filter" class="dynamic-filter-expander" data-filter_id="114">操作系统</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="os_build_filter" class="dynamic-filter-expander" data-filter_id="114">操作系统版本</a>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="relationship_type_filter" class="dynamic-filter-expander" data-filter_id="114">关联</a>
+                        </td>
+                        <td class="small-caption category " colspan="3">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="tag_string_filter" class="dynamic-filter-expander" data-filter_id="114">标签</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="small-caption " id="show_profile_filter_target">
+                            <input type="hidden" name="profile_id[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="platform_filter_target">
+                            <input type="hidden" name="platform[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="os_filter_target">
+                            <input type="hidden" name="os[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="os_build_filter_target">
+                            <input type="hidden" name="os_build[]" value="0"/>任意
+                        </td>
+                        <td class="small-caption " id="relationship_type_filter_target">
+                            <input type="hidden" name="relationship_type" value="-1"/>
+                            <input type="hidden" name="relationship_bug" value="0"/>任意
+                        </td>
+                        <td class="small-caption " colspan="3" id="tag_string_filter_target">
+                            <input type="hidden" name="tag_string" value=""/>
+                        </td>
+                    </tr>
+                    <tr class="spacer"></tr>
+                    <tr>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="per_page_filter" class="dynamic-filter-expander" data-filter_id="114">显示</a>
+                        </td>
+                        <td class="small-caption " id="per_page_filter_target">
+                            50<input type="hidden" name="per_page" value="50"/>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="show_sort_filter" class="dynamic-filter-expander" data-filter_id="114">排序方式</a>
+                        </td>
+                        <td class="small-caption " id="show_sort_filter_target">
+                            最后更新 降序<input type="hidden" name="sort[]" value="last_updated"/>
+                            <input type="hidden" name="dir[]" value="DESC"/>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="match_type_filter" class="dynamic-filter-expander" data-filter_id="114">匹配类型</a>
+                        </td>
+                        <td class="small-caption " id="match_type_filter_target">
+                            所有情况		<input type="hidden" name="match_type" value="0"/>
+                        </td>
+                        <td class="small-caption category ">
+                            <a href="/view_filters_page.php?for_screen=1&static=1&view_type=simple" id="highlight_changed_filter" class="dynamic-filter-expander" data-filter_id="114">突出已更新（小时）</a>
+                        </td>
+                        <td class="small-caption " id="highlight_changed_filter_target">
+                            6		<input type="hidden" name="highlight_changed" value="6">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="widget-toolbox padding-8 clearfix">
+            <div class="btn-toolbar pull-left">
+                <div class="form-inline">
+                    <input type="text" id="filter-search-txt" class="input-sm" size="16" name="search" placeholder="搜索" value=""/>
+                    <input type="submit" class="btn btn-primary btn-sm btn-white btn-round no-float" name="filter_submit" value="应用过滤器"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div></div></div>
+<div class="col-md-12 col-xs-12">
+    <div class="space-10"></div>
+    <form id="bug_action" method="post" action="bug_actiongroup_page.php">
+        <div class="widget-box widget-color-blue2">
+            <div class="widget-header widget-header-small">
+                <h4 class="widget-title lighter">
+                    <i class="fa fa-columns ace-icon"></i>
+                    查看问题<span class="badge">1 - 50 / 62</span>
+                </h4>
+            </div>
+            <div class="widget-body">
+                <div class="widget-toolbox padding-8 clearfix">
+                    <div class="btn-toolbar">
+                        <div class="btn-group pull-left">
+                            <a class="btn btn-primary btn-white btn-round btn-sm" href="print_all_bug_page.php">打印报告</a>
+                            <a class="btn btn-primary btn-white btn-round btn-sm" href="csv_export.php">导出为CSV</a>
+                            <a class="btn btn-primary btn-white btn-round btn-sm" href="excel_xml_export.php">导出为Excel</a>
+                            <a class="btn btn-sm btn-primary btn-white btn-round" href="/plugin.php?page=XmlImportExport/export">XML导出</a>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <ul class="pagination small no-margin">
+                                <li class="pull-right">
+                                    <a href="view_all_bug_page.php?page_number=2">末页</a>
+                                </li>
+                                <li class="pull-right">
+                                    <a href="view_all_bug_page.php?page_number=2">后页</a>
+                                </li>
+                                <li class="pull-right">
+                                    <a href="view_all_bug_page.php?page_number=2">2</a>
+                                </li>
+                                &#160;
+                                <li class="active pull-right">
+                                    <a>1</a>
+                                </li>
+                                <li class="disabled pull-right">
+                                    <a>前页</a>
+                                </li>
+                                <li class="disabled pull-right">
+                                    <a>首页</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-main no-padding">
+                <div class="table-responsive checkbox-range-selection">
+                    <table id="buglist" class="table table-bordered table-condensed table-hover table-striped">
+                        <thead>
+                            <tr class="buglist-headers">
+                                <th class="column-selection">&#160;</th>
+                                <th class="column-edit">&#160;</th>
+                                <th class="column-priority">
+                                    <a href="view_all_set.php?sort_add=priority&amp;dir_add=ASC&amp;type=2">P</a>
+                                </th>
+                                <th class="column-id">
+                                    <a href="view_all_set.php?sort_add=id&amp;dir_add=ASC&amp;type=2">编号</a>
+                                </th>
+                                <th class="column-bugnotes-count">
+                                    <i class="fa fa-comments blue" title="Issue Notes count"></i>
+                                </th>
+                                <th class="column-attachments">
+                                    <i class="fa fa-paperclip blue" title="附件计数"></i>
+                                </th>
+                                <th class="column-category">
+                                    <a href="view_all_set.php?sort_add=category_id&amp;dir_add=ASC&amp;type=2">分类</a>
+                                </th>
+                                <th class="column-severity">
+                                    <a href="view_all_set.php?sort_add=severity&amp;dir_add=ASC&amp;type=2">严重性</a>
+                                </th>
+                                <th class="column-status">
+                                    <a href="view_all_set.php?sort_add=status&amp;dir_add=ASC&amp;type=2">状态</a>
+                                </th>
+                                <th class="column-date-submitted">
+                                    <a href="view_all_set.php?sort_add=date_submitted&amp;dir_add=ASC&amp;type=2">报告日期</a>
+                                </th>
+                                <th class="column-last-modified">
+                                    <a href="view_all_set.php?sort_add=last_updated&amp;dir_add=ASC&amp;type=2">最后更新</a>
+                                    &#160;<i class="fa fa-caret-down fa-lg blue"></i>
+                                </th>
+                                <th class="column-summary">
+                                    <a href="view_all_set.php?sort_add=summary&amp;dir_add=ASC&amp;type=2">摘要</a>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2554" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=2554">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2554">0002554</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2554#attachments" title="查看 1 问题 # 2554 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">资源管理系统</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-07-29</td>
+                                <td class="column-last-modified">2025-07-29</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2554">【系统设置-管理员日志】缺少对带宽信息的操作记录</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2553" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=2553">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2553">0002553</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2553#attachments" title="查看 1 问题 # 2553 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">资源管理系统</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-07-29</td>
+                                <td class="column-last-modified">2025-07-29</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2553">【系统设置-管理员日志】创建区域日志未记录操作模块</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2552" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=2552">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2552">0002552</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2552#attachments" title="查看 1 问题 # 2552 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">资源管理系统</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-07-29</td>
+                                <td class="column-last-modified">2025-07-29</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2552">【系统设置-管理员列表】添加账号没请求接口</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2551" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=2551">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2551">0002551</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2551#attachments" title="查看 1 问题 # 2551 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">资源管理系统</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="zhaoyibo" href="http://bug.test.com/view_user_page.php?id=8">赵义博</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-07-29</td>
+                                <td class="column-last-modified">2025-07-29</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2551">【云计算-裸金属分组/云服务器分组】新建/编辑后没有提示语</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2550" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2550">0002550</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2550#attachments" title="查看 1 问题 # 2550 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">资源管理系统</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-84-fg"></i>
+                                        <span title="稍后处理">延迟修复</span>
+                                        (<a title="zhangzhiling" href="http://bug.test.com/view_user_page.php?id=14">张桎菱</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-07-29</td>
+                                <td class="column-last-modified">2025-07-29</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2550">【云计算-区域管理】按名称查询：输入超过20个字符报错</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2490" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=2490">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2490">0002490</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2490#attachments" title="查看 1 问题 # 2490 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云计算-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;产品设计
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="tujiayang" href="http://bug.test.com/view_user_page.php?id=26">涂佳杨</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-07-15</td>
+                                <td class="column-last-modified">2025-07-15</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2490">【个人中心-消息推送】资源告警和接受方式交互有冲突</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2344" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2344">0002344</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2344#attachments" title="查看 1 问题 # 2344 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云计算海外版-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-84-fg"></i>
+                                        <span title="已修正">延迟修复</span>
+                                        (<a title="tangyuanbin" href="http://bug.test.com/view_user_page.php?id=12">唐元彬</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-07-02</td>
+                                <td class="column-last-modified">2025-07-08</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2344">【官网】菜单悬浮框，鼠标点击后会消失</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="2252" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=2252">0002252</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=2252#attachments" title="查看 1 问题 # 2252 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云计算-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-84-fg"></i>
+                                        <span title="稍后处理">延迟修复</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-06-25</td>
+                                <td class="column-last-modified">2025-06-26</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=2252">【官网-云服务器/裸金属购买页面】未隐藏没有套餐的区域/带宽类型</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="1978" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=1978">0001978</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=1978&amp;nbn=1#bugnotes">1</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=1978#attachments" title="查看 1 问题 # 1978 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云计算海外版-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-84-fg"></i>
+                                        <span title="已修正">延迟修复</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-06-06</td>
+                                <td class="column-last-modified">2025-06-09</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=1978">【云服务器-购买页面】折后价3位数时，价格和标签显示不全</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="1340" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=1340">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=1340">0001340</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">&#160;</td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云计算-管理端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;产品设计
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="tujiayang" href="http://bug.test.com/view_user_page.php?id=26">涂佳杨</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-04-22</td>
+                                <td class="column-last-modified">2025-04-22</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=1340">【设置-管理员操作日志】部分操作缺少日志</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="966" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=966">0000966</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=966#attachments" title="查看 1 问题 # 966 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云计算-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-84-fg"></i>
+                                        <span title="已修正">延迟修复</span>
+                                        (<a title="zhaoyibo" href="http://bug.test.com/view_user_page.php?id=8">赵义博</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2025-03-31</td>
+                                <td class="column-last-modified">2025-04-08</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=966">【消息推送】未信任前，样式不对</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="284" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=284">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=284">0000284</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=284#attachments" title="查看 1 问题 # 284 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-21</td>
+                                <td class="column-last-modified">2024-11-21</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=284">【工作流管理】普通转码中，水印预设URL填写错误，会导致保存报错，但是保存成功</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="283" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=283">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=283">0000283</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=283#attachments" title="查看 1 问题 # 283 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-21</td>
+                                <td class="column-last-modified">2024-11-21</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=283">【工作流管理】名称重复的错误提示会出现两次</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="279" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=279">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-up fa-lg red " title="高"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=279">0000279</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=279#attachments" title="查看 1 问题 # 279 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">
+                                    <span class="bold">很严重</span>
+                                </td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-21</td>
+                                <td class="column-last-modified">2024-11-21</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=279">【任务管理】输入URL地址，提示地址错误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="282" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=282">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=282">0000282</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=282#attachments" title="查看 1 问题 # 282 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-21</td>
+                                <td class="column-last-modified">2024-11-21</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=282">【普通转码】默认转码预设，字幕按未设置保存，编辑显示的是禁用字幕</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="281" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=281">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=281">0000281</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=281#attachments" title="查看 1 问题 # 281 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-21</td>
+                                <td class="column-last-modified">2024-11-21</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=281">【工作流管理】普通转码中，上传的本地文件在PC端删除后，任务会执行失败</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="280" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=280">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=280">0000280</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=280#attachments" title="查看 1 问题 # 280 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-21</td>
+                                <td class="column-last-modified">2024-11-21</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=280">【任务管理】输入源切换后，错误信息没有初始化</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="192" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=192">0000192</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=192#attachments" title="查看 1 问题 # 192 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-07</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=192">【工作流管理】输出详情的“文件名”未赋值</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="185" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=185">0000185</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=185#attachments" title="查看 1 问题 # 185 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-06</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=185">【工作流管理】视频拼接详情，拼接文件未取到源视频之外的文件</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="181" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=181">0000181</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=181#attachments" title="查看 1 问题 # 181 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-06</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=181">【预设管理-视频拼接】表单搜索，封装格式返回值有误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="159" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=159">0000159</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=159#attachments" title="查看 1 问题 # 159 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="重新打开">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-04</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=159">【预设管理-拼接预设】“拼接文件”字段缺少必填项符号，保存时缺少必填提示</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="158" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=158">0000158</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=158#attachments" title="查看 1 问题 # 158 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-04</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=158">【预设管理-截图预设】截图类型搜索，返回数据有误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="145" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=145">0000145</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=145&amp;nbn=2#bugnotes">2</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=145#attachments" title="查看 2 问题 # 145 附件">2</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;产品设计
+                                    </div>
+                                </td>
+                                <td class="column-severity">小调整</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-01</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=145">{需求}【预设管理-截图预设】编辑状态下，未设置图片分辨率的情况，宽高值显示需修改</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="144" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=144">0000144</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=144&amp;nbn=1#bugnotes">1</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=144#attachments" title="查看 1 问题 # 144 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="重新打开">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-01</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=144">【预设管理-截图预设】结束时间“时、分、秒”未按需求限制范围</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="143" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=143">0000143</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=143&amp;nbn=1#bugnotes">1</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=143#attachments" title="查看 1 问题 # 143 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="重新打开">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-01</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=143">【预设管理-截图预设】开始时间“时、分、秒”未按需求限制范围</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="142" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=142">0000142</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=142&amp;nbn=1#bugnotes">1</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=142#attachments" title="查看 2 问题 # 142 附件">2</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="重新打开">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-01</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=142">【预设管理-截图预设】截图预设侧边栏有多余字段</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="132" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=132">0000132</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=132&amp;nbn=1#bugnotes">1</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=132#attachments" title="查看 1 问题 # 132 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="重新打开">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-10-31</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=132">【任务管理】创建任务时，取消第一个上传的视频，并上传第二个，第二个不会上传</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="129" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=129">0000129</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=129#attachments" title="查看 1 问题 # 129 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">文字</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="重新打开">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-10-30</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=129">【预设管理-截图预设】结束时间提示语需修改</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="116" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=116">0000116</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=116&amp;nbn=1#bugnotes">1</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=116#attachments" title="查看 1 问题 # 116 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="重新打开">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-10-29</td>
+                                <td class="column-last-modified">2024-11-13</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=116">【预设管理-拼接预设】必填项未填写时提交，未拦截，导致后端报错</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="168" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=168">0000168</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=168#attachments" title="查看 1 问题 # 168 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-05</td>
+                                <td class="column-last-modified">2024-11-11</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=168">【任务管理】删除工作流，会导致关联的任务执行失败</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="126" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-up fa-lg red " title="高"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=126">0000126</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=126#attachments" title="查看 1 问题 # 126 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">
+                                    <span class="bold">很严重</span>
+                                </td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-10-30</td>
+                                <td class="column-last-modified">2024-11-11</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=126">【任务管理】视频还没有上传成功的情况下，提交任务成功</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="194" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=194">0000194</a>
+                                </td>
+                                <td class="column-bugnotes-count">
+                                    <a href="view.php?id=194&amp;nbn=1#bugnotes">1</a>
+                                </td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=194#attachments" title="查看 2 问题 # 194 附件">2</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-07</td>
+                                <td class="column-last-modified">2024-11-11</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=194">【任务管理】设置水印的时候，上传多个原视频，会导致每个任务都报错</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="169" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=169">0000169</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=169#attachments" title="查看 1 问题 # 169 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小调整</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-05</td>
+                                <td class="column-last-modified">2024-11-11</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=169">{需求}【工作流管理】工作流关联的预设修改的情况，工作流详情查看时没有对应修改</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="167" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=167">0000167</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=167#attachments" title="查看 1 问题 # 167 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-05</td>
+                                <td class="column-last-modified">2024-11-11</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=167">【任务管理】创建任务选择的工作流，如果其关联的预设被删除，提示异常</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="193" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-arrow-up fa-lg red " title="紧急"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=193">0000193</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=193#attachments" title="查看 1 问题 # 193 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-07</td>
+                                <td class="column-last-modified">2024-11-11</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=193">【任务管理】批量创建任务一直处于“处理中”状态</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="172" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=172">0000172</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=172#attachments" title="查看 1 问题 # 172 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小调整</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-05</td>
+                                <td class="column-last-modified">2024-11-07</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=172">{需求}【工作流管理】工作流只限制节点数量</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="161" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=161">0000161</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=161#attachments" title="查看 1 问题 # 161 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小调整</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-04</td>
+                                <td class="column-last-modified">2024-11-07</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=161">{需求}【普通转码】音频编码设置的时候，允许保存原声道数</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="189" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=189">0000189</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=189#attachments" title="查看 1 问题 # 189 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-80-fg"></i>
+                                        <span title="已修正">已解决</span>
+                                        (<a title="liuwenli" href="http://bug.test.com/view_user_page.php?id=13">柳文莉</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-07</td>
+                                <td class="column-last-modified">2024-11-07</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=189">【节点任务】按时间筛选，传参错误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="190" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=190">0000190</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=190#attachments" title="查看 1 问题 # 190 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-07</td>
+                                <td class="column-last-modified">2024-11-07</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=190">【任务管理】自定义工作流保存为工作流模板时，报错</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="177" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=177">0000177</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=177#attachments" title="查看 1 问题 # 177 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-管理端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-83-fg"></i>
+                                        <span title="已修正">不予解决</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-06</td>
+                                <td class="column-last-modified">2024-11-07</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=177">【运维-节点任务】节点的任务数相关全部都是0</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="188" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=188">0000188</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=188#attachments" title="查看 1 问题 # 188 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-07</td>
+                                <td class="column-last-modified">2024-11-07</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=188">【普通转码】音频为MP3时，选择原声道数报错</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="110" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=110">0000110</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=110#attachments" title="查看 1 问题 # 110 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="liujiaxin" href="http://bug.test.com/view_user_page.php?id=20">刘佳鑫</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-10-29</td>
+                                <td class="column-last-modified">2024-11-07</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=110">【普通转码预设】crf值校验范围错误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="174" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=174">0000174</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">&#160;</td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-05</td>
+                                <td class="column-last-modified">2024-11-06</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=174">{需求}【工作流管理】当前节点数需要限制为最多50个</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="149" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=149">0000149</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=149#attachments" title="查看 1 问题 # 149 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-81-fg"></i>
+                                        <span title="已修正">已发布</span>
+                                        (<a title="zhuzhaofeng" href="http://bug.test.com/view_user_page.php?id=27">朱兆峰</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-01</td>
+                                <td class="column-last-modified">2024-11-06</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=149">【任务管理】筛选输入栏，筛选内容错误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="176" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=176">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=176">0000176</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=176#attachments" title="查看 1 问题 # 176 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-05</td>
+                                <td class="column-last-modified">2024-11-05</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=176">【普通转码】图片水印缩放，当前预览是按图片本身大小进行缩放的</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="160" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">
+                                    <a href="bug_update_page.php?bug_id=160">
+                                        <i class="fa fa-pencil bigger-130 padding-2 grey" title="编辑"></i>
+                                    </a>
+                                </td>
+                                <td class="column-priority">
+                                    <i class="fa fa-minus fa-lg orange2 " title="中"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=160">0000160</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=160#attachments" title="查看 2 问题 # 160 附件">2</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;后端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-50-fg"></i>
+                                        <span title="未处理">已分配</span>
+                                        (<a title="tangping" href="http://bug.test.com/view_user_page.php?id=25">唐平</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-04</td>
+                                <td class="column-last-modified">2024-11-04</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=160">【工作流管理】添加图片水印，图片格式为bmp格式的报错</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="150" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=150">0000150</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=150#attachments" title="查看 1 问题 # 150 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-80-fg"></i>
+                                        <span title="已修正">已解决</span>
+                                        (<a title="liuwenli" href="http://bug.test.com/view_user_page.php?id=13">柳文莉</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-04</td>
+                                <td class="column-last-modified">2024-11-04</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=150">【首页概览】分辨率字段名错误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="135" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=135">0000135</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=135#attachments" title="查看 1 问题 # 135 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-80-fg"></i>
+                                        <span title="已修正">已解决</span>
+                                        (<a title="tangyuanbin" href="http://bug.test.com/view_user_page.php?id=12">唐元彬</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-10-31</td>
+                                <td class="column-last-modified">2024-11-01</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=135">【运营-产品文档】文档删除后，页面未刷新，仍然显示被删除文档</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="141" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=141">0000141</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=141#attachments" title="查看 1 问题 # 141 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-80-fg"></i>
+                                        <span title="已修正">已解决</span>
+                                        (<a title="tangyuanbin" href="http://bug.test.com/view_user_page.php?id=12">唐元彬</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-11-01</td>
+                                <td class="column-last-modified">2024-11-01</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=141">【运营-消息通知】新建、编辑消息通知，发布时间的“分”单位判断逻辑有误</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="column-selection">
+                                    <div class="checkbox no-padding no-margin">
+                                        <label>
+                                            <input type="checkbox" name="bug_arr[]" value="136" class="ace"/>
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="column-edit">&#160;</td>
+                                <td class="column-priority">
+                                    <i class="fa fa-chevron-down fa-lg green " title="低"></i>
+                                </td>
+                                <td class="column-id">
+                                    <a href="/view.php?id=136">0000136</a>
+                                </td>
+                                <td class="column-bugnotes-count">&#160;</td>
+                                <td class="column-attachments">
+                                    <a href="view.php?id=136#attachments" title="查看 1 问题 # 136 附件">1</a>
+                                </td>
+                                <td class="column-category">
+                                    <div class="align-left">
+                                        <span class="small project">
+                                            [<a href="view_all_set.php?sort_add=project_id&amp;dir_add=ASC&amp;type=2">云转码-用户端</a>
+                                            ]
+                                        </span>
+                                        &#160;&#160;前端
+                                    </div>
+                                </td>
+                                <td class="column-severity">小错误</td>
+                                <td class="column-status">
+                                    <div class="align-left">
+                                        <i class="fa fa-square fa-status-box status-80-fg"></i>
+                                        <span title="已修正">已解决</span>
+                                        (<a title="tangyuanbin" href="http://bug.test.com/view_user_page.php?id=12">唐元彬</a>
+                                        )
+                                    </div>
+                                </td>
+                                <td class="column-date-submitted">2024-10-31</td>
+                                <td class="column-last-modified">2024-11-01</td>
+                                <td class="column-summary">
+                                    <a href="view.php?id=136">【运营-常见问题】问题删除后，页面未刷新，仍然显示被删除问题</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="widget-toolbox padding-8 clearfix">
+                    <div class="form-inline pull-left">
+                        <label class="inline">
+                            <input class="ace check_all input-sm" type="checkbox" id="bug_arr_all" name="bug_arr_all" value="all"/>
+                            <span class="lbl padding-6">全选 </span>
+                        </label>
+                        <!--suppress HtmlFormInputWithoutLabel -->
+                        <select name="action" class="input-sm">
+                            <option value="MOVE">移动</option>
+                            <option value="COPY">复制</option>
+                            <option value="ASSIGN">分配</option>
+                            <option value="CLOSE">关闭</option>
+                            <option value="DELETE">删除</option>
+                            <option value="RESOLVE">处理状况</option>
+                            <option value="UP_PRIOR">更新优先级</option>
+                            <option value="EXT_UPDATE_SEVERITY">更新严重性</option>
+                            <option value="UP_STATUS">更新状态</option>
+                            <option value="UP_CATEGORY">更新类别</option>
+                            <option value="VIEW_STATUS">更新查看权限</option>
+                            <option value="EXT_ADD_NOTE">添加注释</option>
+                            <option value="EXT_ATTACH_TAGS">添加标签</option>
+                        </select>
+                        <input type="submit" class="btn btn-primary btn-white btn-sm btn-round" value="确定"/>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <ul class="pagination small no-margin">
+                            <li class="pull-right">
+                                <a href="view_all_bug_page.php?page_number=2">末页</a>
+                            </li>
+                            <li class="pull-right">
+                                <a href="view_all_bug_page.php?page_number=2">后页</a>
+                            </li>
+                            <li class="pull-right">
+                                <a href="view_all_bug_page.php?page_number=2">2</a>
+                            </li>
+                            &#160;
+                            <li class="active pull-right">
+                                <a>1</a>
+                            </li>
+                            <li class="disabled pull-right">
+                                <a>前页</a>
+                            </li>
+                            <li class="disabled pull-right">
+                                <a>首页</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div></div></div><div class="clearfix"></div>
+<div class="space-20"></div>
+<div class="footer noprint">
+    <div class="footer-inner">
+        <div class="footer-content">
+            <div class="col-md-6 col-xs-12 no-padding">
+                <address>
+                    <strong>
+                        Powered by <a href="https://www.mantisbt.org" title="bug tracking software">MantisBT </a>
+                    </strong>
+                    <br>
+                    <small>Copyright &copy;2000 - 2025 MantisBT Team</small>
+                    <br>
+                    <small>
+                        联系<a href="mailto:webmaster@example.com" title="Contact the webmaster via e-mail.">管理员</a>
+                        获取援助
+                    </small>
+                    <br>
+                </address>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="pull-right" id="powered-by-mantisbt-logo">
+                    <a href="https://www.mantisbt.org" title="Mantis Bug Tracker: a free and open source web based bug tracking system.">
+                        <img src="/images/mantis_logo.png" width="102" height="35" alt="Powered by Mantis Bug Tracker: a free and open source web based bug tracking system."/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a class="btn-scroll-up btn btn-sm btn-inverse display" id="btn-scroll-up" href="#">
+    <i class="fa fa-angle-double-up ace-icon icon-only bigger-110"></i>
+</a>
+</div><script type="text/javascript" src="/js/bootstrap-3.4.1.min.js"></script>
+<script type="text/javascript" src="/js/moment-with-locales-2.29.4.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-datetimepicker-4.17.47.min.js"></script>
+<script type="text/javascript" src="/js/typeahead.jquery-1.3.4.min.js"></script>
+<script type="text/javascript" src="/js/list-2.3.1.min.js"></script>
+<script type="text/javascript" src="/js/ace.min.js"></script>
+</body></html>

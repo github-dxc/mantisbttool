@@ -1,0 +1,50 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "mantisbttool",
+  "version": "0.1.0",
+  "identifier": "com.mantisbttool.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:8080",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "mantisbttool",
+        "width": 1200,
+        "height": 800,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/StoreLogo.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+  
+    "createUpdaterArtifacts": true
+  },
+  "plugins": {
+    "updater": {
+      "windows": {
+        "installMode": "passive"
+      },
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDZCQTE4NkM3QUUzQzhCRDMKUldUVGl6eXV4NGFoYTN4bEs1NmhjREc3WmdZVHVRbmF3R2RJa3NnNXpiNEtPZUt0Qk12RkNVclEK",
+      "endpoints": [
+        "https://gist.githubusercontent.com/github-dxc/a766afdc71e31267ce55a5681d24c069/raw/latest.json"
+      ]
+    }
+  }
+}

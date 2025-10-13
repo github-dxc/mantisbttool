@@ -1,0 +1,260 @@
+<template>
+  <div class="app-container">
+    <Sidebar :menu-list="menuList" :active-menu="activeMenu" :user-avatar="userAvatar" @switch-menu="handleSwitchMenu"
+      @open-settings="openSettings" />
+
+    <ContentArea :current-menu="currentMenu" :user-avatar="userAvatar" :bug-list="bugList" :bug-msgs="bugMsgs"
+      :group-msgs="groupMsgs" :bug-total="bugTotal" :enums="enums" />
+
+    <SettingsDialog v-model:visible="settingsVisible" @close="closeSettings" />
+    <Update />
+  </div>
+</template>
+
+<script setup vapor>
+import { ref, computed, markRaw, onMounted } from 'vue';
+import {
+  ChatDotRound, CirclePlus, Document, Star, Bell
+} from '@element-plus/icons-vue';
+import Sidebar from './Sidebar.vue';
+import ContentArea from './ContentArea.vue';
+import SettingsDialog from './SettingsDialog.vue';
+import SubscribePanel from './panels/SubscribePanel.vue';
+import ChatPanel from './panels/ChatPanel.vue';
+import Update from '../components/Update.vue';
+import ListPanel from './panels/ListPanel.vue';
+import AddBug from './panels/AddBug.vue';
+import ToolPanel from './panels/ToolPanel.vue';
+import { useRouter } from 'vue-router';
+import { useUserStore } from "../store";
+import { listen, emit } from '@tauri-apps/api/event';
+import { initBugs, initData, initMsgs, setWindowMessageNotify } from '../api';
+import { formatDate, sleep } from '../util';
+import { createNewWindow, readClipboard } from '../windows';
+
+const router = useRouter()
+const userStore = useUserStore();
+
+// ------------------变量------------------
+const userAvatar = computed(() => userStore.userInfo.avatar);
+const activeMenu = ref('subscribe');
+const menuList = ref([
+  { id: 'subscribe', title: '订阅', icon: markRaw(ChatDotRound), component: markRaw(SubscribePanel) },
+  { id: 'chat', title: '消息', icon: markRaw(Bell), badge: 0, component: markRaw(ChatPanel) },
+  { id: 'files', title: '列表', icon: markRaw(Document), component: markRaw(ListPanel) },
+  { id: 'contacts', title: '新增', icon: markRaw(CirclePlus), component: markRaw(AddBug) },
+  { id: 'favorites', title: '收藏', icon: markRaw(Star), component: markRaw(ToolPanel) }
+]);
+const settingsVisible = ref(false);
+const bugList = ref([]);
+const bugMsgs = ref([]);
+const bugTotal = ref(0);
+const enums = ref({});
+let mouseX = 0;
+let mouseY = 0;
+
+// ------------------计算属性------------------
+const shortcut_ts_conf = computed(() => userStore.settingInfo.shortcut.timestamp);
+
+const currentMenu = computed(() => {
+  return menuList.value.find(menu => menu.id === activeMenu.value);
+});
+
+const readMsg = computed(() => userStore.userInfo.read_msg);
+
+const groupMsgs = computed(() => {
+  let msgs = [];
+  let unreadCount = 0;
+  let is_last_msg = readMsg.value === '';
+  for (let i = 0; i < bugMsgs.value.length; i++) {
+    const e = bugMsgs.value[i];
+    let item = msgs.find(h => h.user_id === e.handler_id && h.timestamp === e.updated_at && h.bug_id === e.bug_id)
+    if (item) {
+      item.operations.push(`${e.field} ${e.change}`);
+    } else {
+      let msg = {
+        bug_id: e.bug_id,
+        user_id: e.handler_id,
+        username: e.handler,
+        timestamp: e.updated_at,
+        timestr: formatDate(e.updated_at),
+        operations: [`${e.field} ${e.change}`]
+      };
+      if (is_last_msg) {
+        msg.is_new = true;
+        unreadCount++;
+      }
+      if (readMsg.value === `${e.updated_at}-${e.bug_id}-${e.handler_id}`) {
+        is_last_msg = true;
+        msg.is_last_msg = true;
+      };
+      msgs.push(msg);
+    }
+  }
+  menuList.value[1].badge = unreadCount;
+  if (!unreadCount) {
+    // 清除消息通知
+    NewMessageNotify(0);
+  }
+  return msgs;
+});
+
+// ------------------方法------------------
+const handleSwitchMenu = (menu) => {
+  activeMenu.value = menu.id;
+};
+const openSettings = () => {
+  settingsVisible.value = true;
+};
+const closeSettings = () => {
+  settingsVisible.value = false;
+};
+const api_bug_list = async () => {
+  try {
+    // 获取bug列表
+    let data = await initBugs();
+    console.log("api_init_bugs:", data);
+    if (data) {
+      bugList.value = data || [];
+      bugTotal.value = bugList.value.length;
+    }
+  } catch (error) {
+    console.log(error);
+    router.push("/login");
+  }
+}
+const api_msg_list = async () => {
+  try {
+    // 获取msg列表
+    let data = await initMsgs();
+    console.log("api_init_msgs:", data);
+    if (data) {
+      bugMsgs.value = data || [];
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+const api_init_data = async () => {
+  try {
+    let data = await initData();
+    console.log("api_init_data:", data);
+    let enumsData = JSON.parse(data)
+    if (enumsData) {
+      enums.value = enumsData;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const NewMessageNotify = async (count) => {
+  try {
+    await setWindowMessageNotify(count);
+  } catch (error) {
+    console.error("setWindowNessageNotify error:", error);
+  }
+};
+
+// ------------------订阅数据------------------
+
+// 监听rust发送的消息
+listen('sub_bugs', (event) => {
+  console.log('sub_bugs:', event.payload)
+  try {
+    const obj = event.payload;
+    if (obj) {
+      bugList.value = obj;
+      bugTotal.value = bugList.value.length;
+    };
+  } catch (error) {
+    console.error('解析 JSON 失败:', error);
+    return;
+  }
+});
+listen('sub_msgs', (event) => {
+  console.log('sub_msgs:', event.payload)
+  // 新消息通知
+  NewMessageNotify(event.payload.length);
+  try {
+    const obj = event.payload;
+    if (obj) {
+      bugMsgs.value.push(...obj);
+    };
+  } catch (error) {
+    console.error('解析 JSON 失败:', error);
+    return;
+  }
+});
+listen('global-keyboard-event', (event) => {
+  console.log('global-keyboard-event:', event.payload)
+  if (!shortcut_ts_conf.value) return;
+  // 如果是粘贴事件
+  if (event.payload == "\u{3}") {
+    // 读取剪贴板内容
+    readClipboard().then((text) => {
+      // 检查是否为时间戳或日期时间格式
+      const isTimestamp = /^\d{10,13}$/.test(text); // 匹配10-13位数字（秒或毫秒时间戳）
+      const isDateTime = /^\d{4}(-|\/)(?:0[1-9]|1[0-2])(-|\/)(?:0[1-9]|[12]\d|3[01])\s(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/.test(text);
+      
+      if (!isTimestamp && !isDateTime) {
+        console.log('Invalid format:', text);
+        return;
+      }
+
+      createNewWindow('time-trans', {
+        url: '/time-trans', // 窗口加载的URL
+        title: 'time-trans',
+        x: mouseX + 10,
+        y: mouseY + 10,
+        width: 260,
+        height: 120,
+        visible: true,
+        resizable: false,
+        transparent: false,//背景是否透明
+        decorations: false,//是否有边框
+        skipTaskbar: true,//跳过任务栏
+        alwaysOnTop: true//保持上层
+      }, () => {
+        // 发送时间给页面
+        emit('trans-time', text);
+      }).then(() => {
+        console.log("Window created successfully");
+      }).catch((err) => {
+        console.error("Failed to create window:", err);
+      });
+    }).catch((err) => {
+      console.error("Failed to read clipboard:", err);
+    });
+  }
+});
+listen('mouse-move-event', (event) => {
+  mouseX = event.payload[0];
+  mouseY = event.payload[1];
+});
+
+
+// ------------------初始化------------------
+
+onMounted(async () => {
+  userStore.getUserInfo();
+  console.log("userStore.userInfo:", userStore.userInfo);
+  userStore.changeGetHost("");
+  console.log("userStore.host:", userStore.serverHost);
+  // 初始化枚举数据
+  await api_init_data();
+  // 查询bug列表
+  await api_bug_list();
+  // 初始化消息数据
+  await api_msg_list();
+});
+</script>
+
+<style scoped>
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background: #e9e7e6;
+}
+</style>

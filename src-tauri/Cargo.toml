@@ -1,0 +1,50 @@
+[package]
+name = "mantisbttool"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["dxc"]
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "mantisbttool_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.11", features = ["json", "cookies", "rustls-tls", "multipart"] }
+tokio = { version = "1", features = ["full"] }
+scraper = "0.12"
+tauri-plugin-notification = "2"
+url = "2.5.0"
+serde_html_form = "0.2.7"
+chrono = "0.4"
+chrono-tz = "0.10.3"
+log = "0.4.27"
+env_logger = "0.11.8"
+tauri-plugin-store = "2"
+mime_guess = "2.0"
+lazy_static = "1.4.0"
+windows = { version = "0.52", features = ["Win32_UI_WindowsAndMessaging", "Win32_Foundation", "Win32_System_Com", "Win32_UI_Shell"] }
+gtk = { version = "0.18", features = ["v3_24"] }
+tauri-plugin-clipboard-manager = "2"
+rdev = "0.5.3"
+
+[target.'cfg(not(any(target_os = "android", target_os = "ios")))'.dependencies]
+tauri-plugin-autostart = "2"
+tauri-plugin-updater = "2"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc = "0.2"
+cocoa = "0.25"
+core-foundation = "0.9"
