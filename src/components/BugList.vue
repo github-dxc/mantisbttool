@@ -326,7 +326,13 @@ const handleCommand = async (command) => {
         } else if (status === 85) {
             resolution = 30;
         }
-        const result = await updateBug({ bug_id: bug_id, status: status, resolution: resolution });
+        const result = await updateBug({ bug_id: bug_id, status: status, resolution: resolution }).catch(error => {
+            ElMessage({
+                message: error.message || '更新失败，请稍后重试',
+                type: 'error',
+            });
+            logout();
+        });
         console.log("更新成功", result);
     } catch (error) {
         ElMessage({
@@ -342,9 +348,10 @@ const changeBug = function (data) {
         console.log("更新成功:", result);
     }).catch(error => {
         ElMessage({
-            message: '更新失败，请稍后重试',
+            message: error.message || '更新失败，请稍后重试',
             type: 'error',
         });
+        logout();
         console.error("更新失败:", error);
     });
 }

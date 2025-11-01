@@ -9,13 +9,16 @@ use enums::*;
 use env_logger;
 use log::{debug, info, warn};
 use model::*;
+use rdev::listen;
 use rdev::EventType;
 use reqwest::cookie::{CookieStore, Jar};
 use scraper::Html;
 use serde_json::Value;
 use std::collections::HashMap;
 use std::collections::HashSet;
+use std::fs;
 use std::sync::{Arc, Mutex};
+use std::thread;
 use tauri::async_runtime::block_on;
 use tauri::{AppHandle, Emitter, Manager, WindowEvent};
 use tauri_plugin_autostart::MacosLauncher;
@@ -26,8 +29,6 @@ use tauri_plugin_updater::{Update, UpdaterExt};
 use tokio::signal;
 use tokio::time::{interval, Duration};
 use url::Url;
-use rdev::listen;
-use std::thread;
 use utils::*;
 
 use crate::badge::set_message_notify;
@@ -514,6 +515,8 @@ async fn api_update_bug(
     let bug_info;
     {
         let body = my_view_detail(jar.clone(), bug_id, &host).await?;
+        // 保存页面到本地
+        // fs::write(format!("bug_{}_update.html", bug_id), body.as_bytes());
         let document = Html::parse_document(body.as_str());
         bug_update_page_token = get_page_token(&document, "bug_update_page_token")?;
         bug_info = my_view_detail_data(&document, &host, &catgory_kv, &project_kv)?;
@@ -579,6 +582,7 @@ async fn api_update_bug(
     };
     println!("{:?}", bug);
     let resp = bug_update(jar.clone(), bug, &host).await?;
+    fs::write(format!("bug_{}_update_resp.html", bug_id), resp.as_bytes());
     if let Some(s) = get_error_info(&Html::parse_document(resp.as_str())) {
         println_cookies(&jar, &host);
         return Err(s);
@@ -1371,12 +1375,12 @@ fn listen_keybord_event(app: AppHandle) -> Result<(), String> {
                     }
                     None => {
                         // 获取鼠标位置
-                        if let EventType::MouseMove{x,y} = event.event_type {
+                        if let EventType::MouseMove { x, y } = event.event_type {
                             // info!("x:{},y:{}", x, y)
                             let _ = app.emit("mouse-move-event", (x, y));
                         }
                     }
-                    _ => { /* 其他按键事件 */}
+                    _ => { /* 其他按键事件 */ }
                 }
             }) {
                 warn!("Keyboard listener error: {:?}", err);

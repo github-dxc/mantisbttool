@@ -11,6 +11,9 @@
                 </template>
             </el-input>
         </div>
+        <div class="close-button">
+            <el-icon :size="12" color="#ACAFB5" @click="closeWebWindow('time-trans', true)"><CircleClose /></el-icon>
+        </div>
 
         <!-- 控制选项 -->
         <el-row :gutter="20" class="control-section">
@@ -286,6 +289,13 @@ const dateToTimestamp = (dateString) => {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.close-button {
+    position: absolute;
+    top: -5px;
+    right: -4px;
+    cursor: pointer;
 }
 
 .card-header {

@@ -116,9 +116,11 @@ export const getColorByUnicPalette = function(unic) {
 // 复制数据到剪切板
 export const copyMessage = (message) => {
   navigator.clipboard.writeText(message).then(() => {
+    // 展示一秒
     ElMessage({
       message: '复制成功',
       type: 'success',
+      duration: 1000
     })
   }).catch(err => {
     console.error("复制失败:", err);

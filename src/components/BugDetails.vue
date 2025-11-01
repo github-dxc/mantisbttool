@@ -200,7 +200,7 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { QuillEditor,Quill } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { formatDate, getFirstChar, getColorByUnicPalette, byteArrayToBase64Image } from '../util';
-import { apiBugInfo, browserOpen, imageBase64, updateBug } from '../api';
+import { apiBugInfo, browserOpen, imageBase64, logout, updateBug } from '../api';
 import { ElMessage } from "element-plus";
 import { createNewWindow } from '../windows';
 import { emit } from '@tauri-apps/api/event';
@@ -409,9 +409,10 @@ const changeBug = function(data) {
     getBugInfo();
   }).catch(error => {
     ElMessage({
-      message: '更新失败，请稍后重试',
+      message: error.message || '更新失败，请稍后重试',
       type: 'error',
     });
+    logout();
     console.error("更新失败:", error);
   });
 }
