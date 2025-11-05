@@ -40,8 +40,7 @@ async function logout() {
     callback: async (action) => {
       if (action.toString() === 'confirm') {
         try {
-          await userStore.logout();
-          router.push("Login");
+          userStore.logout().then(() => router.push("Login"));
         } catch (error) {
           console.error('登出失败:', error)
         }

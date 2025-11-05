@@ -143,6 +143,11 @@ import { QuillEditor, Quill } from '@vueup/vue-quill';
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import { ElMessage } from 'element-plus'
 import { bugReport } from '../../api'
+import { useUserStore } from '../../store';
+import { useRouter } from 'vue-router';
+
+const userStore = useUserStore();
+const router = useRouter();
 
 // Props 定义
 const props = defineProps({
@@ -287,8 +292,7 @@ const uploadBug = async (submitData, files=[]) => {
     ElMessage.success('提交成功！');
   }).catch(error => {
     ElMessage.error('提交失败，请稍后重试' + error);
-    logout();
-    console.error("提交失败:", error);
+    userStore.logout().then(() => router.push("Login"));
   });
 }
 

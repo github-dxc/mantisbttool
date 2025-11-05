@@ -582,7 +582,6 @@ async fn api_update_bug(
     };
     println!("{:?}", bug);
     let resp = bug_update(jar.clone(), bug, &host).await?;
-    fs::write(format!("bug_{}_update_resp.html", bug_id), resp.as_bytes());
     if let Some(s) = get_error_info(&Html::parse_document(resp.as_str())) {
         println_cookies(&jar, &host);
         return Err(s);

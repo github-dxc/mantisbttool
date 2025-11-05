@@ -152,13 +152,14 @@
 import { ref, onMounted, computed } from "vue";
 import { listen, emit } from '@tauri-apps/api/event';
 import { createNewWindow } from "../windows";
-import { apiBugInfo, browserOpen, logout, updateBug } from "../api";
+import { apiBugInfo, browserOpen, updateBug } from "../api";
 import { ElMessage } from "element-plus";
 import { useUserStore } from "../store";
 import BugDetails from "./BugDetails.vue";
 import { EditPen } from "@element-plus/icons-vue";
 import Annotation from "./Annotation.vue";
 import { copyMessage } from "../util";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
     page: {
@@ -192,6 +193,7 @@ const emits = defineEmits(['change-page']);
 
 //------------------data-------------------//
 const userStore = useUserStore();
+const router = useRouter();
 const bugDetailsVisible = ref(false);
 const bugDetailsTitle = ref("Bug明细");
 const bugId = ref(0);
@@ -332,8 +334,8 @@ const handleCommand = async (command) => {
             message: error.message || '更新失败，请稍后重试',
             type: 'error',
         });
-        logout();
         console.error("更新失败:", error);
+        userStore.logout().then(() => router.push("Login"));
     });
 }
 
@@ -345,8 +347,8 @@ const changeBug = function (data) {
             message: error.message || '更新失败，请稍后重试',
             type: 'error',
         });
-        logout();
         console.error("更新失败:", error);
+        userStore.logout().then(() => router.push("Login"));
     });
 }
 
