@@ -286,7 +286,9 @@ const uploadBug = async (submitData, files=[]) => {
   bugReport({ ...submitData, binary_file }).then(result => {
     ElMessage.success('提交成功！');
   }).catch(error => {
-    ElMessage.error('更新失败，请稍后重试' + error);
+    ElMessage.error('提交失败，请稍后重试' + error);
+    logout();
+    console.error("提交失败:", error);
   });
 }
 

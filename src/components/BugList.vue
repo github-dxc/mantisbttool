@@ -152,7 +152,7 @@
 import { ref, onMounted, computed } from "vue";
 import { listen, emit } from '@tauri-apps/api/event';
 import { createNewWindow } from "../windows";
-import { apiBugInfo, browserOpen, updateBug } from "../api";
+import { apiBugInfo, browserOpen, logout, updateBug } from "../api";
 import { ElMessage } from "element-plus";
 import { useUserStore } from "../store";
 import BugDetails from "./BugDetails.vue";
@@ -315,32 +315,26 @@ const handleCommand = async (command) => {
     console.log("处理命令:", command);
     let status = command.status;
     let bug_id = command.bug_id;
-    try {
-        let resolution = 0;
-        if (status === 80 || status === 81 || status === 82) {
-            resolution = 20;
-        } else if (status === 83) {
-            resolution = 90;
-        } else if (status === 84) {
-            resolution = 80;
-        } else if (status === 85) {
-            resolution = 30;
-        }
-        const result = await updateBug({ bug_id: bug_id, status: status, resolution: resolution }).catch(error => {
-            ElMessage({
-                message: error.message || '更新失败，请稍后重试',
-                type: 'error',
-            });
-            logout();
-        });
-        console.log("更新成功", result);
-    } catch (error) {
+    let resolution = 0;
+    if (status === 80 || status === 81 || status === 82) {
+        resolution = 20;
+    } else if (status === 83) {
+        resolution = 90;
+    } else if (status === 84) {
+        resolution = 80;
+    } else if (status === 85) {
+        resolution = 30;
+    }
+    updateBug({ bug_id: bug_id, status: status, resolution: resolution }).then(result => {
+        console.log("更新成功:", result);
+    }).catch(error => {
         ElMessage({
-            message: '更新失败，请稍后重试',
+            message: error.message || '更新失败，请稍后重试',
             type: 'error',
         });
-        console.error("更新失败", error);
-    }
+        logout();
+        console.error("更新失败:", error);
+    });
 }
 
 const changeBug = function (data) {
