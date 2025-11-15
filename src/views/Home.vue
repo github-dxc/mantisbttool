@@ -241,8 +241,11 @@ onMounted(async () => {
   console.log("userStore.userInfo:", userStore.userInfo);
   userStore.changeGetHost("");
   console.log("userStore.host:", userStore.serverHost);
-  // 初始化枚举数据
+  // 初始化枚举数据（每5分钟初始化一次）
   await api_init_data();
+  setInterval(async () => {
+    await api_init_data();
+  }, 5 * 60 * 1000);
   // 查询bug列表
   await api_bug_list();
   // 初始化消息数据

@@ -1,3 +1,4 @@
+use gtk::glib::clone;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Default, Serialize, Deserialize, Hash, Clone)]
@@ -25,7 +26,7 @@ pub struct UpdateToken {
     pub bug_id: i64,
 }
 
-#[derive(Serialize, Default, Debug)]
+#[derive(Serialize, Default, Debug, Clone)]
 pub struct UpdateBug {
     pub bug_update_token: String,
     pub bug_id: i64,
@@ -179,6 +180,7 @@ pub struct FiltersParams {
 pub struct LoginInfo {
     pub logined: bool,
     pub username: String,
+    pub password: String,
     pub user_id: i64,
     pub read_msg: String,
 }

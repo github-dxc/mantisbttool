@@ -976,7 +976,7 @@ pub fn view_all_set_data(
 // 查询my_view_detail数据
 pub fn my_view_detail_data(
     document: &Html,
-    host: &str,
+    _host: &str,
     category_kv: &Vec<KV>,
     project_kv: &Vec<KV>,
 ) -> Result<BugInfo, String> {

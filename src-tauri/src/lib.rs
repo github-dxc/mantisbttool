@@ -6,7 +6,7 @@ mod utils;
 use chrono::{NaiveTime, TimeZone, Utc};
 use chrono_tz::Asia::Shanghai;
 use enums::*;
-use env_logger;
+use flexi_logger::{Logger, Duplicate, FileSpec, Criterion, Naming, Cleanup};
 use log::{debug, info, warn};
 use model::*;
 use rdev::listen;
@@ -16,7 +16,6 @@ use scraper::Html;
 use serde_json::Value;
 use std::collections::HashMap;
 use std::collections::HashSet;
-use std::fs;
 use std::sync::{Arc, Mutex};
 use std::thread;
 use tauri::async_runtime::block_on;
@@ -36,9 +35,17 @@ use crate::badge::set_message_notify;
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     // 初始化日志实现库
-    env_logger::Builder::new()
-        .filter_level(log::LevelFilter::Info) // 设置日志级别为 Debug
-        .init();
+    Logger::try_with_str("info").map_err(|e|{println!("log err:{}",e);e})
+        .unwrap()
+        .log_to_file(FileSpec::default().directory("logs").basename("mantisbttool"))
+        .duplicate_to_stdout(Duplicate::Info) // 同时在stdout打印info及以上
+        .rotate(
+            Criterion::Size(10_000_000), // 10 MB
+            Naming::Numbers,
+            Cleanup::KeepLogFiles(7),
+        )
+        .start().map_err(|e|{println!("start err:{}",e);e})
+        .unwrap();
     tauri::Builder::default()
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_autostart::init(
@@ -325,6 +332,7 @@ async fn api_login(app: AppHandle, username: &str, password: &str) -> Result<Str
         let mut user = state.user.lock().map_err(|e| format!("lock err:{}", e))?;
         user.logined = true;
         user.username = username.to_string();
+        user.password = password.to_string();
         user.user_id = get_user_id(&Html::parse_document(body.as_str()))?;
         let mut jar_ = state.jar.lock().map_err(|e| format!("lock err:{}", e))?;
         *jar_ = jar;
@@ -333,6 +341,36 @@ async fn api_login(app: AppHandle, username: &str, password: &str) -> Result<Str
     // 初始化分组和项目
     init_project_catgory(app).await?;
     return Ok(result);
+}
+
+// 更新cookies
+async fn update_cookies(app: AppHandle) -> Result<(), String> {
+    let state = app.state::<MyState>().clone();
+    let jar = state
+        .jar
+        .lock()
+        .map_err(|e| format!("lock err:{}", e))?
+        .clone();
+    let host = state
+        .host
+        .lock()
+        .map_err(|e| format!("lock err:{}", e))?
+        .clone();
+    let user = state
+            .user
+            .lock()
+            .map_err(|e| format!("lock err:{}", e))?
+            .clone();
+    let result = login(jar.clone(), &user.username, &user.password, &host)
+        .await
+        .map_err(|e| format!("login err:{}", e))?;
+    if let Some(s) = get_error_info(&Html::parse_document(result.as_str())) {
+        println_cookies(&jar, &host);
+        return Err(s);
+    };
+    // 初始化分组和项目
+    init_project_catgory(app).await?;
+    return Ok(());
 }
 
 // 退出登录
@@ -581,11 +619,20 @@ async fn api_update_bug(
         bugnote_text: "".to_string(),
     };
     println!("{:?}", bug);
-    let resp = bug_update(jar.clone(), bug, &host).await?;
+    let resp = bug_update(jar.clone(), bug.clone(), &host).await?;
+    let mut err = String::default();
     if let Some(s) = get_error_info(&Html::parse_document(resp.as_str())) {
         println_cookies(&jar, &host);
-        return Err(s);
+        err = s;
+        // return Err(s);
     };
+    // 如果错误是因为登录失效，则重新登录一次
+    if err != "" {
+        warn!("更新bug失败:{}", err);
+        let a2 = app.clone();
+        update_cookies(a2).await?;
+        let _ = bug_update(jar.clone(), bug, &host).await?;
+    }
 
     // 更新订阅数据
     update_sub_data(app).await?;
@@ -852,6 +899,20 @@ fn init_global_state(app: AppHandle) -> Result<(), String> {
 }
 
 fn sync_init_project_catgory(app: AppHandle) -> Result<(), String> {
+    // 每5分钟执行一次
+    let app_clone = app.clone();
+    tauri::async_runtime::spawn(async move {
+        let mut interval = tokio::time::interval(Duration::from_secs(300));
+        loop {
+            interval.tick().await;
+            let app_clone1 = app_clone.clone();
+            let r = init_project_catgory(app_clone1).await;
+            match r {
+                Ok(_) => info!("sync_init_project_catgory exec ok"),
+                Err(msg) => warn!("sync_init_project_catgory exec err: {}", msg),
+            }
+        }
+    });
     // 开启线程同步执行异步函数
     block_on(init_project_catgory(app))
 }

@@ -81,7 +81,7 @@ pub fn flash_taskbar_icon(window: &Window) -> Result<(), String> {
     Ok(())
 }
 
-const CLSID_TaskbarList: GUID = GUID::from_u128(0x56FDF344_FD6D_11d0_958A_006097C9A090);
+const CLSID_TASKBAR_LIST: GUID = GUID::from_u128(0x56FDF344_FD6D_11d0_958A_006097C9A090);
 
 // 显示消息通知状态（红色进度条）
 #[cfg(target_os = "windows")]
@@ -92,7 +92,7 @@ pub fn show_message_notification(window: &Window) -> Result<(), String> {
 
         // 创建 TaskbarList 实例
         let taskbar_list: ITaskbarList3 =
-            CoCreateInstance(&CLSID_TaskbarList, None, CLSCTX_INPROC_SERVER)
+            CoCreateInstance(&CLSID_TASKBAR_LIST, None, CLSCTX_INPROC_SERVER)
                 .map_err(|e| format!("Failed to create TaskbarList: {:?}", e))?;
 
         // 初始化任务栏列表
@@ -127,7 +127,7 @@ pub fn clear_taskbar_status(window: &Window) -> Result<(), String> {
 
         // 创建 TaskbarList 实例
         let taskbar_list: ITaskbarList3 =
-            CoCreateInstance(&CLSID_TaskbarList, None, CLSCTX_INPROC_SERVER)
+            CoCreateInstance(&CLSID_TASKBAR_LIST, None, CLSCTX_INPROC_SERVER)
                 .map_err(|e| format!("Failed to create TaskbarList: {:?}", e))?;
 
         // 初始化任务栏列表
