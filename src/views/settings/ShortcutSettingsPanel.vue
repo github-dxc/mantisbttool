@@ -25,7 +25,7 @@ const shortcut = ref({
 });
 
 const shortcuts = ref([
-  { id: 1, label: '查看时间', key: 'Ctrl + C' },
+  // { id: 1, label: '查看时间', key: 'Ctrl + C' },
 ]);
 
 const changeShortcutSetting = () => {

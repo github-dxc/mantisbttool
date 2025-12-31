@@ -186,48 +186,6 @@ listen('sub_msgs', (event) => {
     return;
   }
 });
-listen('global-keyboard-event', (event) => {
-  console.log('global-keyboard-event:', event.payload)
-  if (!shortcut_ts_conf.value) return;
-  // 如果是粘贴事件
-  if (event.payload == "\u{3}") {
-    // 读取剪贴板内容
-    readClipboard().then((text) => {
-      // 检查是否为时间戳或日期时间格式
-      const isTimestamp = /^\d{10,13}$/.test(text); // 匹配10-13位数字（秒或毫秒时间戳）
-      const isDateTime = /^\d{4}(-|\/)(?:0[1-9]|1[0-2])(-|\/)(?:0[1-9]|[12]\d|3[01])\s(?:[01]\d|2[0-3]):(?:[0-5]\d):(?:[0-5]\d)$/.test(text);
-      
-      if (!isTimestamp && !isDateTime) {
-        console.log('Invalid format:', text);
-        return;
-      }
-
-      createNewWindow('time-trans', {
-        url: '/time-trans', // 窗口加载的URL
-        title: 'time-trans',
-        x: mouseX + 10,
-        y: mouseY + 10,
-        width: 260,
-        height: 120,
-        visible: true,
-        resizable: false,
-        transparent: false,//背景是否透明
-        decorations: false,//是否有边框
-        skipTaskbar: true,//跳过任务栏
-        alwaysOnTop: true//保持上层
-      }, () => {
-        // 发送时间给页面
-        emit('trans-time', text);
-      }).then(() => {
-        console.log("Window created successfully");
-      }).catch((err) => {
-        console.error("Failed to create window:", err);
-      });
-    }).catch((err) => {
-      console.error("Failed to read clipboard:", err);
-    });
-  }
-});
 listen('mouse-move-event', (event) => {
   mouseX = event.payload[0];
   mouseY = event.payload[1];

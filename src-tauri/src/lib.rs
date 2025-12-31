@@ -9,15 +9,12 @@ use enums::*;
 use flexi_logger::{Logger, Duplicate, FileSpec, Criterion, Naming, Cleanup};
 use log::{debug, info, warn};
 use model::*;
-use rdev::listen;
-use rdev::EventType;
 use reqwest::cookie::{CookieStore, Jar};
 use scraper::Html;
 use serde_json::Value;
 use std::collections::HashMap;
 use std::collections::HashSet;
 use std::sync::{Arc, Mutex};
-use std::thread;
 use tauri::async_runtime::block_on;
 use tauri::{AppHandle, Emitter, Manager, WindowEvent};
 use tauri_plugin_autostart::MacosLauncher;
@@ -94,8 +91,6 @@ pub fn run() {
             find_sub_data(app.handle().clone());
             //注册关闭回调
             close_app_callback(app.handle().clone());
-            //注册快捷键
-            listen_keybord_event(app.handle().clone())?;
             Ok(())
         })
         .on_window_event(move |window, event| {
@@ -1419,36 +1414,6 @@ fn close_app_callback(app: AppHandle) {
         }
         app.exit(0);
     });
-}
-
-// 监听键盘事件
-fn listen_keybord_event(app: AppHandle) -> Result<(), String> {
-    thread::Builder::new()
-        .name("rdev-listener".into())
-        .spawn(move || {
-            // rdev::listen 是阻塞的，放在独立线程
-            if let Err(err) = listen(move |event| {
-                match event.name {
-                    Some(name) => {
-                        // 向前端广播事件
-                        let _ = app.emit("global-keyboard-event", name);
-                    }
-                    None => {
-                        // 获取鼠标位置
-                        if let EventType::MouseMove { x, y } = event.event_type {
-                            // info!("x:{},y:{}", x, y)
-                            let _ = app.emit("mouse-move-event", (x, y));
-                        }
-                    }
-                    _ => { /* 其他按键事件 */ }
-                }
-            }) {
-                warn!("Keyboard listener error: {:?}", err);
-            }
-        })
-        .map_err(|e| format!("spawn failed: {}", e))?;
-
-    Ok(())
 }
 
 #[cfg(test)]
